@@ -15,3 +15,21 @@ This repository contains the official implementation of the paper "Privacy-Prese
 | Regions      | California     | California     | California     | California     |
 
 </div>
+
+## Requirements
+
+- torch
+- torchvision
+- numpy
+- pandas
+- scikit-learn
+- matplotlib
+- h5py
+- tqdm
+- flask
+
+## Running Experiments
+
+ ```bash
+     python main1.py --root /path/to/dataset --dataset PEMS08 --device cuda --seed 42
+     ```
