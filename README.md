@@ -16,17 +16,25 @@ This repository contains the official implementation of the paper "Privacy-Prese
 
 </div>
 
+## 📂 Directory Structure
+
+```plaintext
+📂 P-PFDSTL/
+│
+├── 📝 embedding.py           # Traffic embedding for spatial-temporal data
+├── 📝 DSGL.py                # Spatio-temporal feature extraction
+├── 📝 FL.py                  # Federated learning client and aggregation logic
+└── 📝 main1.py               # Main entry for training and evaluation
+
 ## 📦 Requirements
 
 - torch
-- torchvision
+- datetime
 - numpy
 - pandas
-- scikit-learn
-- matplotlib
-- h5py
-- tqdm
-- flask
+- math
+- scipy
+- torchvision
 
 ## 🚀 Running Experiments
 
