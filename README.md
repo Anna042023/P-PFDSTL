@@ -2,7 +2,7 @@
 
 This repository contains the official implementation of the paper "Privacy-Preserving Federated Dynamic Spatio-Temporal Learning for Traffic Flow Prediction in Consumer IoT Networks".
 
-## Datasets
+## 📊 Datasets
 
 <div align="center">
 
@@ -16,7 +16,7 @@ This repository contains the official implementation of the paper "Privacy-Prese
 
 </div>
 
-## Requirements
+## 📦 Requirements
 
 - torch
 - torchvision
@@ -28,8 +28,8 @@ This repository contains the official implementation of the paper "Privacy-Prese
 - tqdm
 - flask
 
-## Running Experiments
+## 🚀 Running Experiments
 
  ```bash
-     python main1.py --root /path/to/dataset --dataset PEMS08 --device cuda --seed 42
+     python main1.py --root <path_to_dataset> --dataset <dataset_name> --device <device> --seed <random_seed>
  ```
