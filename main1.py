@@ -263,7 +263,7 @@ def run_dataset(name, root, device="cuda", t_in=12, t_out=12, seed=42):
 
     # 5) Federated hyperparams (更稳：降低 lr，适度 local_epochs，减小 proximal 强度)
     #    轻微按数据集规模分档（四个数据集都会更稳）
-    rounds = 30
+    rounds = 40
     clients = 4
     batch = 32
     local_epochs = 2
@@ -354,10 +354,10 @@ def run_dataset(name, root, device="cuda", t_in=12, t_out=12, seed=42):
         for i in range(clients)
     ]
 
-    # 更平滑的聚合（避免某些数据集 client 相似度极端）
+
     aggregator = FLAggregator(
-        sigma=10.0,
-        tau=3000.0,
+        sigma=,
+        tau=,
         device=torch.device(device),
     )
 
