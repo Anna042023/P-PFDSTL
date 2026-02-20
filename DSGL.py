@@ -122,9 +122,6 @@ def positive_feature_map(x: torch.Tensor) -> torch.Tensor:
 
 
 class SpatialMemoryAttention(nn.Module):
-    """
-    改动：移除了 A_bias 与 psi_mod 两个“掩码/门控”，仅保留记忆注意主通路。
-    """
     def __init__(self, d_model: int, E: int = 64, num_memory: int = 16,
                  n_heads: int = 4, node_embed_dim: int = 16):
         super().__init__()
@@ -186,12 +183,10 @@ class SpatialMemoryAttention(nn.Module):
         main_att = torch.einsum("bne,ed->bnd", phi_Q, KtV)                   # (BT, N, d)
         mem_val = torch.einsum("bnm,md->bnd", A_dyn_qm, V)                   # (BT, N, d)
 
-        # —— 已移除节点偏置图 A_bias 对 mem_val 的图乘加权（第1个掩码）
+
         att_out = main_att  # + 0
 
-        # —— 已移除 psi_mod 对 att_out 的逐元素门控（第2个掩码）
-        # psi_mod = torch.einsum("bnm,md->bnd", A_dyn_qm, Psi)              # (BT, N, d)
-        # H_prime = att_out * psi_mod
+
         H_prime = att_out
 
         # 残差 + 投影 + 归一化
@@ -282,12 +277,6 @@ class SoftDTW(nn.Module):
 
 
 class SoftDTWSemanticAttention(nn.Module):
-    """
-    改动：仅保留 SoftDTW 构图；移除其后的 Attention（Q/K/V + 掩码）。
-    输出：
-      - H_sem：与 H_temp 同形状的零张量（不再对特征进行语义注意更新）
-      - A_sem：由 SoftDTW 距离经 softmax(-dist) 得到的相似度图，并用 top-l 稀疏化后行归一化
-    """
     def __init__(self, d_model: int, top_l: int = 5, gamma: float = 0.5, window: int = 4):
         super().__init__()
         self.d_model = d_model
@@ -369,7 +358,6 @@ class SoftDTWSemanticAttention(nn.Module):
         row_sum = A_sem.sum(-1, keepdim=True) + 1e-12
         A_sem = A_sem / row_sum
 
-        # 3) 语义特征输出置零（彻底移除 Attention 对特征的更新）
         H_sem = torch.zeros_like(H_temp)
 
         return H_sem, A_sem
