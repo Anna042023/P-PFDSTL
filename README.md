@@ -25,6 +25,7 @@ This repository contains the official implementation of the paper "Privacy-Prese
 ├── 📝 DSGL.py                # Spatio-temporal feature extraction
 ├── 📝 FL.py                  # Federated learning client and aggregation logic
 └── 📝 main1.py               # Main entry for training and evaluation
+```
 
 ## 📦 Requirements
 
